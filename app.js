@@ -9,7 +9,7 @@ let app = express();
 app.use(bodyParser.json());
 app.use(cors());
 app.use(express.static('public'));
-const port = process.env.PORT || 8383;
+const port = process.env.PORT || 8484;
 app.listen(port, function() {
   console.log('server listening on port ' + port);
 });
