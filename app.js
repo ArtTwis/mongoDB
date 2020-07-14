@@ -14,4 +14,11 @@ app.listen(port, function() {
   console.log('server listening on port ' + port);
 });
 
-app.use(require('./routes')); //api router
+const { dbFunctions } = require('./server/counter-db');
+
+app.post('/api/todoApp/add', async (req, res) => {
+  console.log('req.body :', req.body.data);
+  let dbResponse = await dbFunctions.add('todoData', req.body.data);
+  if (dbResponse.status == 'success') return res.status(201).json({ status: 'success', response: dbResponse.response });
+  else return res.status(422).json({ status: 'error', response: 'Bad request!' });
+});
